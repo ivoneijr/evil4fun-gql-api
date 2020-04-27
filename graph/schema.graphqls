@@ -14,8 +14,17 @@ type Post {
   description: String!
   content: String!
   user: User!
+  tags: [Tag!]!
   created_at: String!
   updated_at: String!
+}
+
+type Tag {
+  id: ID!
+  description: String!
+  created_at: String!
+  updated_at: String!
+  posts: [Post!]!
 }
 
 type Query {

@@ -7,18 +7,26 @@ import (
 	"context"
 	"fmt"
 	"graphql-api/graph/generated"
-	"graphql-api/graph/model"
+	"graphql-api/models"
 )
 
-func (r *queryResolver) Posts(ctx context.Context) ([]*model.Post, error) {
+func (r *postResolver) Tags(ctx context.Context, obj *models.Post) ([]*models.Tag, error) {
 	panic(fmt.Errorf("not implemented"))
 }
 
-func (r *queryResolver) Users(ctx context.Context) ([]*model.User, error) {
+func (r *queryResolver) Posts(ctx context.Context) ([]*models.Post, error) {
 	panic(fmt.Errorf("not implemented"))
 }
+
+func (r *queryResolver) Users(ctx context.Context) ([]*models.User, error) {
+	panic(fmt.Errorf("not implemented"))
+}
+
+// Post returns generated.PostResolver implementation.
+func (r *Resolver) Post() generated.PostResolver { return &postResolver{r} }
 
 // Query returns generated.QueryResolver implementation.
 func (r *Resolver) Query() generated.QueryResolver { return &queryResolver{r} }
 
+type postResolver struct{ *Resolver }
 type queryResolver struct{ *Resolver }
