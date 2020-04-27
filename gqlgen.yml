@@ -25,8 +25,21 @@ model:
 models:
   User:
     model: graphql-api/models.User
+    fields:
+      posts:
+        resolver: true
   Post:
     model: graphql-api/models.Post
+    fields:
+      user:
+        resolver: true
+      tags:
+        resolver: true
+  Tag:
+    model: graphql-api/models.Tag
+    fields:
+      posts:
+        resolver: true
   ID:
     model:
       - github.com/99designs/gqlgen/graphql.ID

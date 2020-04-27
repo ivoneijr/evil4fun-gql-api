@@ -5,7 +5,7 @@ type User {
   password: String!
   created_at: String!
   updated_at: String!
-  posts: [Post!]!
+  posts: [Post]
 }
 
 type Post {
@@ -13,8 +13,8 @@ type Post {
   name: String!
   description: String!
   content: String!
-  user: User!
-  tags: [Tag!]!
+  user: User
+  tags: [Tag]
   created_at: String!
   updated_at: String!
 }
@@ -27,7 +27,19 @@ type Tag {
   posts: [Post!]!
 }
 
+input PostInput {
+  name: String!
+  description: String!
+  content: String!
+  user_id: ID!
+  tags: [String]!
+}
+
 type Query {
   posts: [Post!]!
   users: [User!]!
+}
+
+type Mutation {
+  newPost(input: PostInput!): Post!
 }
