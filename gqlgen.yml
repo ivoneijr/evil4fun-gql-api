@@ -23,6 +23,10 @@ model:
 # modelgen, the others will be allowed when binding to fields. Configure them to
 # your liking
 models:
+  User:
+    model: graphql-api/graph/model.User
+  Post:
+    model: graphql-api/graph/model.Post
   ID:
     model:
       - github.com/99designs/gqlgen/graphql.ID
