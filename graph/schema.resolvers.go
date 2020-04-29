@@ -23,20 +23,21 @@ func (r *postResolver) Tags(ctx context.Context, obj *models.Post) ([]*models.Ta
 }
 
 func (r *queryResolver) Posts(ctx context.Context) ([]*models.Post, error) {
-	panic(fmt.Errorf("not implemented"))
+	return []*models.Post{
+		{
+			ID:          "1",
+			Content:     "some",
+			Description: "DEC",
+			Name:        "Name",
+			CreatedAt:   "121",
+			UpdatedAt:   "121",
+		},
+	}, nil
+	// panic(fmt.Errorf("not implemented"))
 }
 
 func (r *queryResolver) Users(ctx context.Context) ([]*models.User, error) {
-	return []*models.User{
-		{
-			ID:        "1",
-			Name:      "ivo",
-			Email:     "ivoneijr@gmail.com",
-			Password:  "12341234",
-			CreatedAt: "now",
-			UpdatedAt: "now",
-		},
-	}, nil
+	return r.UsersRepo.GetUsers()
 }
 
 func (r *tagResolver) Posts(ctx context.Context, obj *models.Tag) ([]*models.Post, error) {

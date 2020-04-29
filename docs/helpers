@@ -1,0 +1,4 @@
+go run github.com/pressly/goose/cmd/goose create create_users sql
+go run github.com/99designs/gqlgen generate
+go run github.com/pressly/goose/cmd/goose postgres "user=postgres dbname=devil4fun sslmode=disable password=postgres" up
+go run github.com/pressly/goose/cmd/goose postgres "user=postgres dbname=postgres sslmode=disable password=postgres" status
