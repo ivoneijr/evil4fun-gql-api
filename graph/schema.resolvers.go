@@ -6,46 +6,67 @@ package graph
 import (
 	"context"
 	"fmt"
+	"graphql-api/db"
 	"graphql-api/graph/generated"
 	"graphql-api/models"
 )
 
 func (r *mutationResolver) NewPost(ctx context.Context, input models.PostInput) (*models.Post, error) {
-	panic(fmt.Errorf("not implemented"))
+	panic(fmt.Errorf("not implemented 1"))
 }
 
 func (r *postResolver) User(ctx context.Context, obj *models.Post) (*models.User, error) {
-	panic(fmt.Errorf("not implemented"))
+	panic(fmt.Errorf("not implemented 2"))
 }
 
 func (r *postResolver) Tags(ctx context.Context, obj *models.Post) ([]*models.Tag, error) {
-	panic(fmt.Errorf("not implemented"))
+	panic(fmt.Errorf("not implemented 3"))
 }
 
 func (r *queryResolver) Posts(ctx context.Context) ([]*models.Post, error) {
-	return []*models.Post{
-		{
-			ID:          "1",
-			Content:     "some",
-			Description: "DEC",
-			Name:        "Name",
-			CreatedAt:   "121",
-			UpdatedAt:   "121",
-		},
-	}, nil
-	// panic(fmt.Errorf("not implemented"))
+	//fmt.Println("@@@@@@@@@@@@@@@@@@")
+	//fmt.Println(ctx)
+	//return []*models.Post{
+	//	{
+	//		ID:          1,
+	//		Content:     "some",
+	//		Description: "DEC",
+	//		Name:        "Name",
+	//	},
+	//}, nil
+	panic(fmt.Errorf("not implemented yet"))
 }
 
 func (r *queryResolver) Users(ctx context.Context) ([]*models.User, error) {
-	return r.UsersRepo.GetUsers()
+	db, err := db.Connection()
+
+	if err != nil {
+		return nil, err
+	}
+
+	var users []*models.User
+	db.Find(&users)
+
+	return users, nil
 }
 
 func (r *tagResolver) Posts(ctx context.Context, obj *models.Tag) ([]*models.Post, error) {
-	panic(fmt.Errorf("not implemented"))
+	panic(fmt.Errorf("not implemented 4 "))
 }
 
 func (r *userResolver) Posts(ctx context.Context, obj *models.User) ([]*models.Post, error) {
-	panic(fmt.Errorf("not implemented"))
+	fmt.Println(obj)
+	db, err := db.Connection()
+
+	if err != nil {
+		return nil, err
+	}
+
+	var postsByUser []*models.Post
+
+	db.Where("user_id = ?", obj.ID).Find(&postsByUser)
+
+	return postsByUser, nil
 }
 
 // Mutation returns generated.MutationResolver implementation.
